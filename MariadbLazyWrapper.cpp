@@ -22,7 +22,10 @@ extern "C" {
   }
 
   void MariadbLazy_destroy(void* obj) {
-      delete static_cast<LazyOrm::MariadbLazy*>(obj);
+      if (obj != nullptr) {
+        delete static_cast<LazyOrm::MariadbLazy*>(obj);
+      }
+      std::cout << __func__ << std::endl;
   }
 
   void MariadbLazy_setTabeName(void* obj, const char* tabeName) {
@@ -149,6 +152,13 @@ extern "C" {
   void MariadbLazy_setFiltering_ld(void* obj, const char* key, int typeTag, const long double value) {
       if (obj != nullptr) {
           static_cast<LazyOrm::MariadbLazy*>(obj)->appendFilter(castFilterType(key), value);
+      }
+  }
+
+  void MariadbLazy_setWhereFilter(void* obj, void* pushing_obj) {
+      if (obj != nullptr && pushing_obj != nullptr) {
+          auto pushingWhereFilter = static_cast<LazyOrm::WhereFilter*>(pushing_obj);
+          static_cast<LazyOrm::MariadbLazy*>(obj)->setNestedWhere(*pushingWhereFilter);
       }
   }
 
