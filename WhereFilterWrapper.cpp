@@ -16,7 +16,6 @@ extern "C" {
         if (obj != nullptr) {
             delete static_cast<LazyOrm::WhereFilter*>(obj);
         }
-        std::cout << __func__ << std::endl;
     }
 
     void WhereFilter_addVarinat(void* whereFilter_obj, void* variant_obj) {

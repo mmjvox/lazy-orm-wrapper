@@ -25,7 +25,6 @@ extern "C" {
       if (obj != nullptr) {
         delete static_cast<LazyOrm::MariadbLazy*>(obj);
       }
-      std::cout << __func__ << std::endl;
   }
 
   void MariadbLazy_setTabeName(void* obj, const char* tabeName) {
@@ -79,7 +78,7 @@ extern "C" {
 
   void MariadbLazy_setProperty_null(void* obj, const char* key) {
       if (obj != nullptr) {
-          static_cast<LazyOrm::MariadbLazy*>(obj)->setProperty(std::string(key), NULL);
+          static_cast<LazyOrm::MariadbLazy*>(obj)->setProperty(std::string(key), std::string("NULL"));
       }
   }
 
@@ -91,7 +90,7 @@ extern "C" {
 
   void MariadbLazy_setProperty_string(void* obj, const char* key, const char* value) {
       if (obj != nullptr) {
-          static_cast<LazyOrm::MariadbLazy*>(obj)->setProperty(std::string(key), value);
+          static_cast<LazyOrm::MariadbLazy*>(obj)->setProperty(std::string(key), std::string(value));
       }
   }
 
